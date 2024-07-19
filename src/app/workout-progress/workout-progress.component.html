@@ -1,6 +1,24 @@
 <div>
-  <input type="text" [(ngModel)]="username" placeholder="Enter username">
-  <button (click)="searchProgress()">Search</button>
+  <h2>Workout Progress for {{ username }}</h2>
+  <!-- Display workout progress -->
+  <div *ngIf="workouts.length">
+    <!-- Example: Display workouts in a table or chart -->
+    <table>
+      <tr>
+        <th>Username</th>
+        <th>Workout Type</th>
+        <th>Minutes</th>
+        <th>Date</th>
+      </tr>
+      <tr *ngFor="let workout of workouts">
+        <td>{{ workout.username }}</td>
+        <td>{{ workout.workoutType }}</td>
+        <td>{{ workout.workoutMinutes }}</td>
+        <td>{{ workout.date | date }}</td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="!workouts.length">
+    No workouts found.
+  </div>
 </div>
-
-<canvas id="progressChart"></canvas>

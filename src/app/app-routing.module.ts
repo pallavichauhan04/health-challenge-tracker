@@ -5,9 +5,10 @@ import { WorkoutListComponent } from './workout-list/workout-list.component';
 import { WorkoutProgressComponent } from './workout-progress/workout-progress.component';
 
 const routes: Routes = [
-  { path: '', component: TrackerFormComponent },
+  { path: '', redirectTo: '/tracker-form', pathMatch: 'full' },
+  { path: 'tracker-form', component: TrackerFormComponent },
   { path: 'workout-list', component: WorkoutListComponent },
-  { path: 'workout-progress', component: WorkoutProgressComponent },
+  { path: 'workout-progress', component: WorkoutProgressComponent }
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WorkoutService } from '../workout.service';
 
@@ -7,24 +7,26 @@ import { WorkoutService } from '../workout.service';
   templateUrl: './tracker-form.component.html',
   styleUrls: ['./tracker-form.component.css']
 })
-export class TrackerFormComponent {
-  username = '';
-  workoutType = '';
-  workoutMinutes = 0;
-  day = '';
-  date = new Date();
+export class TrackerFormComponent implements OnInit {
 
-  constructor(private workoutService: WorkoutService, private router: Router) {}
+  username: string = '';
+  workoutType: string = '';
+  workoutMinutes: number = 0;
+  day: string = '';
 
-  onSubmit() {
-    const newWorkout = {
+  constructor(private workoutService: WorkoutService, private router: Router) { }
+
+  ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    const workoutData = {
       username: this.username,
       workoutType: this.workoutType,
       workoutMinutes: this.workoutMinutes,
-      day: this.day,
-      date: this.date
+      day: this.day
     };
-    this.workoutService.addWorkout(newWorkout);
-    this.router.navigate(['/workout-list']);
+    this.workoutService.addWorkout(workoutData);
+    this.router.navigate(['/workouts']);
   }
 }

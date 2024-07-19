@@ -20,7 +20,7 @@ describe('WorkoutService', () => {
       workoutType: 'running',
       workoutMinutes: 30,
       date: new Date(),
-      day: 'Monday' // Add the day property here
+      day: 'Monday' // Include the 'day' property here
     };
     service.addWorkout(newWorkout);
     const updatedWorkoutsCount = service.getWorkouts().length;

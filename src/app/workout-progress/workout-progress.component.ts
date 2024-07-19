@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
-import { Workout, WorkoutService } from '../workout.service';
+import { Chart } from 'chart.js';
+import { WorkoutService } from '../workout.service';
 
 @Component({
   selector: 'app-workout-progress',
@@ -8,50 +8,46 @@ import { Workout, WorkoutService } from '../workout.service';
   styleUrls: ['./workout-progress.component.css']
 })
 export class WorkoutProgressComponent implements OnInit {
-
-  chart: any;
-  workouts: Workout[] = [];
   username: string = '';
+  workouts: any[] = [];
+  chart: any;
 
-  constructor(private workoutService: WorkoutService) { 
-    Chart.register(...registerables);
-  }
+  constructor(private workoutService: WorkoutService) {}
 
   ngOnInit(): void {
+    this.username = localStorage.getItem('username') || 'defaultUser';
     this.workouts = this.workoutService.getWorkouts();
+    this.createChart();
   }
 
-  searchProgress(): void {
-    if (this.username) {
-      const userWorkouts = this.workouts.filter(workout => workout.username.toLowerCase() === this.username.toLowerCase());
+  createChart(): void {
+    const workoutData = this.workouts.filter(workout => workout.username === this.username);
+    const labels = workoutData.map(workout => workout.date);
+    const data = workoutData.map(workout => workout.workoutMinutes);
 
-      const workoutTypes = userWorkouts.map(workout => workout.workoutType);
-      const workoutMinutes = userWorkouts.map(workout => workout.workoutMinutes);
-
-      if (this.chart) {
-        this.chart.destroy();
-      }
-
-      this.chart = new Chart('progressChart', {
-        type: 'bar',
-        data: {
-          labels: workoutTypes,
-          datasets: [{
-            label: 'Workout Minutes',
-            data: workoutMinutes,
-            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
+    this.chart = new Chart('workoutChart', {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Workout Minutes',
+          data: data,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            beginAtZero: true
+          },
+          y: {
+            beginAtZero: true
           }
         }
-      });
-    }
+      }
+    });
   }
 }

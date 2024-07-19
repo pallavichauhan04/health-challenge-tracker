@@ -1,27 +1,23 @@
-<form (ngSubmit)="onSubmit()" #trackerForm="ngForm" class="bg-white p-6 rounded shadow-md">
-  <div class="mb-4">
-    <label for="username" class="block text-gray-700">Username:</label>
-    <input type="text" id="username" [(ngModel)]="username" name="username" required
-           class="mt-1 block w-full border rounded-md p-2" placeholder="Enter your username">
+<form (ngSubmit)="onSubmit()" #trackerForm="ngForm">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" [(ngModel)]="username" name="username" required>
   </div>
-  <div class="mb-4">
-    <label for="workoutType" class="block text-gray-700">Workout Type:</label>
-    <select id="workoutType" [(ngModel)]="workoutType" name="workoutType" required
-            class="mt-1 block w-full border rounded-md p-2">
+  <div>
+    <label for="workoutType">Workout Type:</label>
+    <select id="workoutType" [(ngModel)]="workoutType" name="workoutType" required>
       <option value="running">Running</option>
       <option value="swimming">Swimming</option>
       <option value="cycling">Cycling</option>
     </select>
   </div>
-  <div class="mb-4">
-    <label for="workoutMinutes" class="block text-gray-700">Workout Minutes:</label>
-    <input type="number" id="workoutMinutes" [(ngModel)]="workoutMinutes" name="workoutMinutes" required
-           class="mt-1 block w-full border rounded-md p-2" placeholder="Enter workout minutes">
+  <div>
+    <label for="workoutMinutes">Workout Minutes:</label>
+    <input type="number" id="workoutMinutes" [(ngModel)]="workoutMinutes" name="workoutMinutes" required>
   </div>
-  <div class="mb-4">
-    <label for="day" class="block text-gray-700">Day:</label>
-    <input type="date" id="day" [(ngModel)]="day" name="day" required
-           class="mt-1 block w-full border rounded-md p-2">
+  <div>
+    <label for="day">Day:</label>
+    <input type="date" id="day" [(ngModel)]="day" name="day" required>
   </div>
-  <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Workout</button>
+  <button type="submit">Add Workout</button>
 </form>
