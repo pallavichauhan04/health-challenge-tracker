@@ -1,0 +1,9 @@
+/* workout-progress.component.css */
+
+.container {
+  margin-top: 20px;
+}
+
+canvas {
+  max-width: 100%;
+}
